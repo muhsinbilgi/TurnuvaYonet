@@ -110,5 +110,42 @@ inner join statu st on st.Id = s.Statu";
         }
 
 
+        public static class Gorevliler
+        {
+            public static string Insert => @"INSERT INTO `gorevliler`(`Adi`, `Soyadi`, `GorevTuru`, `Resim` ,`TurnuvaId` ) 
+                                                                 VALUES(@Adi,@Soyadi,@GorevTuru,@Resim,@TurnuvaId)";
+            public static string Update => @"update `gorevliler` set
+                                          `Adi` = @Adi,
+                                          `Soyadi` = @Soyadi,
+                                          `GorevTuru` = @GorevTuru,
+                                          `Resim` = @Resim,
+                                          `TurnuvaId` = @TurnuvaId
+                                          where Id = @Id";
+            public static string Delete => "delete from gorevliler where Id = @Id";
+            public static string GetAll => @"select
+                                             t.*,
+                                             g.Adi as GorevAdi
+                                             from gorevliler t 
+                                             inner join gorevturu g on g.Id = t.GorevTuru
+                                             ";
+            public static string GetbyId => @"select
+                                             t.*,
+                                             g.Adi as GorevAdi
+                                             from gorevliler t 
+                                             inner join gorevturu g on g.Id = t.GorevTuru
+                                             where t.Id = @Id";
+        }
+
+        public static class GorevTuru
+        {
+            public static string Insert => @"INSERT INTO `gorevturu`(`Adi`) 
+                                                                 VALUES(@Adi)";
+            public static string Update => @"update `gorevturu` set
+                                         `Adi` = @Adi
+                                          where Id = @Id";
+            public static string Delete => "delete from gorevturu where Id = @Id";
+            public static string GetAll => @"select * from gorevturu";
+            public static string GetbyId => "select * from gorevturu where Id = @Id";
+        }
     }
 }

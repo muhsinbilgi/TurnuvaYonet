@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using TurnuvaWebUygulama.Helper;
 using VeritabaniKatmani.SqlQuery;
+using PagedList;
 
 
 namespace TurnuvaWebUygulama.Controllers
@@ -13,9 +14,16 @@ namespace TurnuvaWebUygulama.Controllers
     public class SporcularController : Controller
     {
         // GET: Sporcu
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 20)
         {
-            return View(GetSporcular());
+
+
+           
+            PagedList<Sporcular> model = new PagedList<Sporcular>(GetSporcular(), page, pageSize);
+
+
+
+            return View(model);
         }
 
         public ActionResult Ekle()
@@ -132,15 +140,15 @@ namespace TurnuvaWebUygulama.Controllers
         }
 
 
-
-
-
-
-
         public List<Sporcular> GetSporcular()
         {
-            var SporcularResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
-            return SporcularResult;
+            var sporcularResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
+            return sporcularResult;
         }
+
+
+
+
+
     }
 }

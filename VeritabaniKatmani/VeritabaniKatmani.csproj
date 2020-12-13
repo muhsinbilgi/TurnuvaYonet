@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IDbModel.cs" />
+    <Compile Include="Model\Gorevliler.cs" />
+    <Compile Include="Model\GorevTuru.cs" />
     <Compile Include="Model\Kategori.cs" />
     <Compile Include="Model\Sporcular.cs" />
     <Compile Include="Model\Statu.cs" />

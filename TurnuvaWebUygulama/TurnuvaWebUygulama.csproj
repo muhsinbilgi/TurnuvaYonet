@@ -48,6 +48,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -162,6 +168,7 @@
     <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\images\twitter_corner_black.png" />
     <Content Include="Content\images\twitter_corner_blue.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\vendors\animate.css\animate.css" />
     <Content Include="Content\vendors\animate.css\animate.min.css" />
     <Content Include="Content\vendors\animate.css\gulpfile.js" />
@@ -2837,6 +2844,8 @@
     <Content Include="Views\Sporcular\Detay.cshtml" />
     <Content Include="Views\Sporcular\Duzenle.cshtml" />
     <Content Include="Views\Gorevliler\Index.cshtml" />
+    <Content Include="Views\Gorevliler\Ekle.cshtml" />
+    <Content Include="Views\Gorevliler\Duzenle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

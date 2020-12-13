@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<VeritabaniKatmani.Sporcular>
+@model PagedList.IPagedList<VeritabaniKatmani.Sporcular>
+@using PagedList.Mvc;
 
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -33,7 +34,7 @@
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col"> @Html.DisplayNameFor(model => model.Adi) @Html.DisplayNameFor(model => model.Soyadi)</th>
+                        <th scope="col"> Adı Soyadı</th>
                         <th scope="col">Takım Adı</th>
                         <th scope="col"> Doğum Yeri</th>
                         <th scope="col"></th>
@@ -67,6 +68,10 @@
                 }
 
             </table>
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+
+        <p> Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.</p>
         </div>
     </div>
 </div>
