@@ -75,6 +75,18 @@ namespace VeritabaniKatmani.Repository
             }
         }
 
+        public IEnumerable<TEntity> GetSearch<TEntity>(String sqlQuery, object parameters) where TEntity : IDbModel
+        {
+            try
+            {
+                return DbConnection.Query<TEntity>(sqlQuery, parameters).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public TEntity Update<TEntity>(string sqlQuery, TEntity item) where TEntity : IDbModel
         {
             try

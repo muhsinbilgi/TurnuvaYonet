@@ -107,7 +107,20 @@ inner join statu st on st.Id = s.Statu";
  inner join takimlar t on t.Id = s.TakimId
  inner join statu st on st.Id = s.Statu
  where s.Id = @Id";
-        }
+
+            public static string GetSearch => @"select 
+ s.*,
+ t.Adi as TakımAdi,
+ st.Adi as StatuAdi
+ from sporcular s
+ inner join takimlar t on t.Id = s.TakimId
+ inner join statu st on st.Id = s.Statu
+ where t.Adi like @TakimAdi or s.Adi like @SporcuAdi";
+            
+
+
+
+    }
 
 
         public static class Gorevliler

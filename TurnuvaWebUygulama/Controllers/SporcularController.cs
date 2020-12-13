@@ -17,13 +17,50 @@ namespace TurnuvaWebUygulama.Controllers
         public ActionResult Index(int page = 1, int pageSize = 20)
         {
 
+                   
+            
+                PagedList<Sporcular> model = new PagedList<Sporcular>(GetSporcular(), page, pageSize);
 
-           
-            PagedList<Sporcular> model = new PagedList<Sporcular>(GetSporcular(), page, pageSize);
+                return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string TakimAdi,string SporcuAdi, int page = 1, int pageSize = 20)
+        {
+          
 
 
 
-            return View(model);
+            if (TakimAdi != "" || SporcuAdi != "")
+            {
+
+                if (TakimAdi != "")
+                {
+                    TakimAdi = "%" + TakimAdi + "%";
+
+                }
+                
+                if (SporcuAdi != "")
+                {
+                    SporcuAdi = "%" + SporcuAdi + "%";
+
+                }
+
+
+                var aramodel = MvcDbHelper.Repository.GetSearch<Sporcular>(Queries.Sporcular.GetSearch, new { TakimAdi = TakimAdi, SporcuAdi = SporcuAdi}).ToList();
+
+                PagedList<Sporcular> model = new PagedList<Sporcular>(aramodel, page, pageSize);
+
+                return View(model);
+            }
+            else
+            {
+                PagedList<Sporcular> model = new PagedList<Sporcular>(GetSporcular(), page, pageSize);
+
+                return View(model);
+            }
+
+            
         }
 
         public ActionResult Ekle()

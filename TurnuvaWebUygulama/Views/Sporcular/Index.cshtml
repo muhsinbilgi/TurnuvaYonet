@@ -11,7 +11,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Takımlar</h1>
+                <h1>Sporcular</h1>
             </div>
         </div>
     </div>
@@ -20,6 +20,7 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li class="active">@Html.ActionLink("Sporcu Ekle", "Ekle", "Sporcu", new { @class = "btn btn-success" })</li>
+
                 </ol>
             </div>
         </div>
@@ -28,7 +29,19 @@
 
 <div class="col-lg-6">
     <div class="card">
+        <div class="card-header">
+            @using (Html.BeginForm("Index", "Sporcular", FormMethod.Post))
+            {
+                <div class="col col-md-4"><input type="text" name="TakimAdi" class="form-control" placeholder="Takım Adı"/></div>
 
+                <div class="col col-md-4"><input type="text" name="SporcuAdi" class="form-control" placeholder="Sporcu Adı" /></div>
+                <div class="col col-md-4"><span> </span>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Ara
+                    </button>
+                </div>
+            }
+        </div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
