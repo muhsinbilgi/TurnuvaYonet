@@ -57,28 +57,42 @@
                         <a href="/Home"> <i class="menu-icon ti-home"></i>Genel</a>
                     </li>
                     <h3 class="menu-title">Müsabaka Yönetimi</h3><!-- /.menu-title -->
+                    @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("H"))
+                    {
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon ti-basketball"></i>Maçlar </a>
+                        </li>
+                    }
 
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-basketball"></i>Maçlar </a>
-                    </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-ruler-pencil"></i>Fikstür Motoru </a>
-                    </li>
+                    @if (User.IsInRole("A") || User.IsInRole("Y"))
+                    {
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon ti-ruler-pencil"></i>Fikstür Motoru </a>
+                        </li>
+                    }
                     <li>
                         <a href="widgets.html"> <i class="menu-icon ti-stats-up"></i>İstatistikler </a>
                     </li>
 
                     <h3 class="menu-title">Tanımlama</h3><!-- /.menu-title -->
-                    <li>
-                        <a href="/Sporcular"> <i class="menu-icon ti-id-badge"></i>Sporcular</a>
-                    </li>
-                    <li>
-                        <a href="/Takimlar"> <i class="menu-icon ti-shield"></i>Takımlar</a>
-                    </li>
-                    <li>
-                        <a href="/Gorevliler"> <i class="menu-icon ti-user"></i>Hakem & Görevli </a>
-                    </li>
-
+                    @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("T") || User.IsInRole("S"))
+                    {
+                        <li>
+                            <a href="/Sporcular"> <i class="menu-icon ti-id-badge"></i>Sporcular</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("T"))
+                    {
+                        <li>
+                            <a href="/Takimlar"> <i class="menu-icon ti-shield"></i>Takımlar</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("A") || User.IsInRole("Y"))
+                    { 
+                        <li>
+                            <a href="/Gorevliler"> <i class="menu-icon ti-user"></i>Hakem & Görevli </a>
+                        </li>
+                    }
                     <h3 class="menu-title">Ekstra</h3><!-- /.menu-title -->
                     <li>
                         <a href="widgets.html"> <i class="menu-icon ti-book"></i>Kurallar </a>
@@ -189,9 +203,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i>  Muhsin Bilgi </a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i>  @HttpContext.Current.User.Identity.Name </a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Bildirimler <span class="count">13</span></a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i> @User.Identity.Name <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Ayarlar</a>
 

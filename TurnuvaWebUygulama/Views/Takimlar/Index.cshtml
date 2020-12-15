@@ -18,8 +18,11 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li class="active">@Html.ActionLink("Takım Ekle", "Ekle", "Takimlar", new { @class = "btn btn-success" })</li>
-                </ol>
+                    @if (User.IsInRole("A") || User.IsInRole("Y"))
+                    {
+                        <li class="active">@Html.ActionLink("Takım Ekle", "Ekle", "Takimlar", new { @class = "btn btn-success" })</li>
+                    }
+                    </ol>
             </div>
         </div>
     </div>
