@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace VeritabaniKatmani
 {
-    public class Kullanicilar : IDbModel
+    public class MacDetay : IDbModel
     {
         public int Id { get; set; }
-        public string AdiSoyadi { get; set; }
-        public string KullaniciAdi { get; set; }
-        public string Parola { get; set; }
-        public string Rol { get; set; }
-        public int TurnuvaId { get; set; }
-        public DateTime SonGirisZamani { get; set; }
-        public int TakimId { get; set; }
+        public int MacId { get; set; }
+        public int SporcuId { get; set; }
+        public int DetayId { get; set; }
+        public string DetayDakika { get; set; }
+
+
         public AbstractDapperRepository Repository { get; set; }
 
         public void SetId(object id)

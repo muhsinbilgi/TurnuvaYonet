@@ -8,16 +8,20 @@ using System.Threading.Tasks;
 
 namespace VeritabaniKatmani
 {
-    public class Kullanicilar : IDbModel
+    public class Maclar : IDbModel
     {
         public int Id { get; set; }
-        public string AdiSoyadi { get; set; }
-        public string KullaniciAdi { get; set; }
-        public string Parola { get; set; }
-        public string Rol { get; set; }
+        public DateTime TarihSaat { get; set; }
+        public int BirinciTakimId { get; set; }
+        public int IkinciTakimId { get; set; }
+        public int Bay { get; set; }
+        public string Hafta { get; set; }
         public int TurnuvaId { get; set; }
-        public DateTime SonGirisZamani { get; set; }
-        public int TakimId { get; set; }
+        public string BirinciTakimAdi { get; set; }
+        public string IkinciTakimAdi { get; set; }
+
+
+
         public AbstractDapperRepository Repository { get; set; }
 
         public void SetId(object id)

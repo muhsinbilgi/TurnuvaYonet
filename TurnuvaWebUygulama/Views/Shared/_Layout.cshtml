@@ -60,7 +60,7 @@
                     @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("H"))
                     {
                         <li>
-                            <a href="widgets.html"> <i class="menu-icon ti-basketball"></i>Maçlar </a>
+                            <a href="/Maclar"> <i class="menu-icon ti-basketball"></i>Maçlar </a>
                         </li>
                     }
 
@@ -203,9 +203,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i>  @HttpContext.Current.User.Identity.Name </a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i>  @User.Identity.Name </a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> @User.Identity.Name <span class="count">13</span></a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Bildirimler <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Ayarlar</a>
 

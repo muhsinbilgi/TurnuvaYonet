@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<VeritabaniKatmani.Maclar>
+
+
+
+
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Maçlar</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <h4>1. Hafta</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Saat</th>
+                        <th scope="col">Takım Adı</th>
+                        <th scope="col"></th>
+                        <th scope="col">Takım Adı</th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.TarihSaat)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TarihSaat)</td>
+                            <td>@Html.DisplayFor(modelItem => item.BirinciTakimAdi)</td>
+                            <td>-</td>
+                            <td>@Html.DisplayFor(modelItem => item.IkinciTakimAdi)</td>
+                            <td>@Html.ActionLink("Maç Detayı", "Detay", "Maclar", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
+
+
+                        </tr>
+
+                    </tbody>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+

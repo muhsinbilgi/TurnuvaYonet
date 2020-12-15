@@ -156,7 +156,7 @@ namespace TurnuvaWebUygulama.Controllers
 
             }
 
-            model.KullaniciId = 1;
+            
             model.TakimId = 1;
             model.TurnuvaId = 1;
             ViewBag.Basari = 1;
@@ -179,8 +179,40 @@ namespace TurnuvaWebUygulama.Controllers
 
         public List<Sporcular> GetSporcular()
         {
-            var sporcularResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
-            return sporcularResult;
+
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+
+            if (m.Rol == "Y")
+            {
+                var takimlarResultY = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyY, new { TurnuvaId = m.TurnuvaId }).ToList();
+                return takimlarResultY;
+            }
+            else if (m.Rol == "T")
+            {
+                var takimlarResultT = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyT, new { TakimId = m.TakimId }).ToList();
+                return takimlarResultT;
+            }
+            else if (m.Rol == "S")
+            {
+                var takimlarResultS = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyS, new { KullaniciId = m.Id }).ToList();
+                return takimlarResultS;
+            }
+            else
+            {
+                var sporcularResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
+                return sporcularResult;
+            }
+
+
+
+
+
+
+
+
+
+
+            
         }
 
 

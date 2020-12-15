@@ -11,19 +11,23 @@ namespace VeritabaniKatmani.SqlQuery
 
         public static class Kullanicilar
         {
-            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`) 
-                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId)";
+            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`) 
+                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId)";
             public static string Update => @"update `kullanicilar` set
                                          `AdiSoyadi` = @AdiSoyadi,
                                          `KullaniciAdi` = @KullaniciAdi,
                                          `Parola` = @Parola,
                                          `Rol` = @Rol,
                                          `TurnuvaId` = @TurnuvaId,
-                                         `SonGirisZamani` = @SonGirisZamani
+                                         `SonGirisZamani` = @SonGirisZamani,
+                                         `TakimId` = @TakimId
                                           where Id = @Id";
             public static string Delete => "delete from kullanicilar where Id = @Id";
             public static string GetAll => @"select * from kullanicilar";
             public static string GetbyId => "select * from kullanicilar where Id = @Id";
+
+            public static string GetbyName => "select * from kullanicilar where KullaniciAdi = @KullaniciAdi";
+
         }
 
         public static class Statu
@@ -62,6 +66,12 @@ namespace VeritabaniKatmani.SqlQuery
                                              from takimlar t
                                              inner join kategori k on k.Id = t.KategoriId 
                                              where t.Id = @Id";
+
+            /* Yönetici için : */
+            public static string GetbyY => "select * from takimlar t where t.TurnuvaId = @TurnuvaId";
+
+            /* Takım Sorumlusu için : */
+            public static string GetbyT => "select * from takimlar t where t.Id = @Id";
         }
 
 
@@ -90,7 +100,6 @@ namespace VeritabaniKatmani.SqlQuery
                                             `Email` = @Email, 
                                             `Statu` = @Statu, 
                                             `Resim` = @Resim, 
-                                            `KullaniciId` = @KullaniciId, 
                                             `LisansNo` = @LisansNo, 
                                             `Mevki` = @Mevki, 
                                             `TakimId` = @TakimId
@@ -120,11 +129,18 @@ inner join statu st on st.Id = s.Statu";
  inner join takimlar t on t.Id = s.TakimId
  inner join statu st on st.Id = s.Statu
  where t.Adi like @TakimAdi or s.Adi like @SporcuAdi";
-            
 
 
+            /* Yönetici için : */
+            public static string GetbyY => "select * from sporcular s where s.TurnuvaId = @TurnuvaId";
 
-    }
+            /* Takım Sorumlusu için : */
+            public static string GetbyT => "select * from sporcular s where s.TakimId= @TakimId";
+
+            /* Sporcu için : */
+            public static string GetbyS => "select * from sporcular s where s.KullaniciId= @KullaniciId";
+
+        }
 
 
         public static class Gorevliler
@@ -163,6 +179,30 @@ inner join statu st on st.Id = s.Statu";
             public static string Delete => "delete from gorevturu where Id = @Id";
             public static string GetAll => @"select * from gorevturu";
             public static string GetbyId => "select * from gorevturu where Id = @Id";
+        }
+
+        public static class Maclar
+        {
+            public static string Insert => @"INSERT INTO `maclar`(`Tarih`,`Saat`,`BirinciTakimId`,`IkinciTakimId`,`Bay`,`Hafta`,`TurnuvaId`) 
+                                                                 VALUES(@Tarih,@Saat,@BirinciTakimId,@IkinciTakimId,@Bay,@Hafta,@TurnuvaId)";
+            public static string Update => @"update `maclar` set
+                                         `Tarih` = @Tarih,
+                                          `Saat`= @Saat,
+                                          `BirinciTakimId`= @BirinciTakimId,
+                                          `IkinciTakimId`= @IkinciTakimId,
+                                          `Bay`= @Bay,
+                                          `Hafta`= @Hafta,
+                                          `TurnuvaId` = @TurnuvaId
+                                          where Id = @Id";
+            public static string Delete => "delete from maclar where Id = @Id";
+            public static string GetAll => @"select 
+                                             m.*,
+                                             t1.Adi as BirinciTakimAdi,
+                                             t2.Adi as IkinciTakimAdi
+                                             from maclar m
+                                             inner join takimlar t1 on t1.Id = m.BirinciTakimId
+                                             inner join takimlar t2 on t2.Id = m.IkinciTakimId";
+            public static string GetbyId => "select * from maclar where Id = @Id";
         }
     }
 }

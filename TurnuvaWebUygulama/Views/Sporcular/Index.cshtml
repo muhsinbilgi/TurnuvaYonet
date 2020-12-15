@@ -32,16 +32,21 @@
 <div class="col-lg-6">
     <div class="card">
         <div class="card-header">
+
             @using (Html.BeginForm("Index", "Sporcular", FormMethod.Post))
             {
-                <div class="col col-md-4"><input type="text" name="TakimAdi" class="form-control" placeholder="Takım Adı"/></div>
+                if (User.IsInRole("A") || User.IsInRole("Y"))
+                {
+                    <div class="col col-md-4"><input type="text" name="TakimAdi" class="form-control" placeholder="Takım Adı" /></div>
 
-                <div class="col col-md-4"><input type="text" name="SporcuAdi" class="form-control" placeholder="Sporcu Adı" /></div>
-                <div class="col col-md-4"><span> </span>
-                    <button type="submit" class="btn btn-success btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Ara
-                    </button>
-                </div>
+                    <div class="col col-md-4"><input type="text" name="SporcuAdi" class="form-control" placeholder="Sporcu Adı" /></div>
+                    <div class="col col-md-4">
+                        <span> </span>
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Ara
+                        </button>
+                    </div>
+                }
             }
         </div>
         <div class="card-body">
@@ -69,9 +74,13 @@
                             <td>@Html.ActionLink("Detay", "Detay", "Sporcular", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
                             <td>@Html.ActionLink("Düzenle", "Duzenle", "Sporcular", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
                             <td>
+
                                 @using (Html.BeginForm("Sil", "Sporcular", new { Id = item.Id }, FormMethod.Post))
                                 {
+                                    if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("T"))
+                                    {
                                     <button class="btn btn-danger">Sil</button>
+                                    }
                                 }
 
                             </td>

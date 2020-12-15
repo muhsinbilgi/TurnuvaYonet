@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using TurnuvaWebUygulama.Helper;
 using VeritabaniKatmani.SqlQuery;
 
+
 namespace TurnuvaWebUygulama.Controllers
 {
     public class TakimlarController : Controller
@@ -14,6 +15,7 @@ namespace TurnuvaWebUygulama.Controllers
         // GET: Takimlar
         public ActionResult Index()
         {
+         
             return View(GetTakimlar());
         }
 
@@ -132,12 +134,30 @@ namespace TurnuvaWebUygulama.Controllers
         }
 
 
-
         public List<Takimlar> GetTakimlar()
         {
-            var takimlarResult = MvcDbHelper.Repository.GetAll<Takimlar>(Queries.Takimlar.GetAll).ToList();
-            return takimlarResult;
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+
+            if(m.Rol == "Y")
+            {
+                var takimlarResultY = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyY, new { TurnuvaId = m.TurnuvaId }).ToList();
+                return takimlarResultY;
+            }
+            else if(m.Rol == "T")
+            {
+                var takimlarResultT = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyT, new { Id = m.TakimId }).ToList();
+                return takimlarResultT;
+            }
+            else
+            {
+                var takimlarResult = MvcDbHelper.Repository.GetAll<Takimlar>(Queries.Takimlar.GetAll).ToList();
+                return takimlarResult;
+            }
+
+           
+           
         }
+
 
     }
 }
