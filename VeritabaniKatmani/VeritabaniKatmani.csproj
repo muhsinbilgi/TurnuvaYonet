@@ -94,6 +94,7 @@
     <Compile Include="Model\Gorevliler.cs" />
     <Compile Include="Model\GorevTuru.cs" />
     <Compile Include="Model\Kategori.cs" />
+    <Compile Include="Model\Kullanicilar.cs" />
     <Compile Include="Model\Sporcular.cs" />
     <Compile Include="Model\Statu.cs" />
     <Compile Include="Model\Takimlar.cs" />

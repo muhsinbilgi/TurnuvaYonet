@@ -83,12 +83,18 @@
                     <li>
                         <a href="widgets.html"> <i class="menu-icon ti-book"></i>Kurallar </a>
                     </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-clipboard"></i>Raporlar </a>
-                    </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-settings"></i>Ayarlar </a>
-                    </li>
+                    @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("H"))
+                    {
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon ti-clipboard"></i>Raporlar </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("A"))
+                    {
+                        <li>
+                            <a href="widgets.html"> <i class="menu-icon ti-settings"></i>Ayarlar </a>
+                        </li>
+                    }
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -106,7 +112,7 @@
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
-                                     
+
 
                         <div class="dropdown for-notification">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -183,36 +189,36 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Profil</a>
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i>  Muhsin Bilgi </a>
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Bildirimler <span class="count">13</span></a>
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Ayarlar</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Çıkış</a>
+                            <a class="nav-link" href="/Login/Logout"><i class="fa fa-power-off"></i> Çıkış</a>
                         </div>
                     </div>
                     <!--
-                    <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
+                <div class="language-select dropdown" id="language-select">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
+                        <i class="flag-icon flag-icon-us"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="language">
+                        <div class="dropdown-item">
+                            <span class="flag-icon flag-icon-fr"></span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-es"></i>
+                        </div>
+                        <div class="dropdown-item">
                             <i class="flag-icon flag-icon-us"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="language">
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-fr"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-it"></i>
-                            </div>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-it"></i>
                         </div>
                     </div>
-                        -->
+                </div>
+                    -->
                 </div>
             </div>
 
@@ -220,10 +226,12 @@
         <!-- Header-->
 
 
-
         @RenderBody()
+
+
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+
 
     <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
     <script src="~/Content/vendors/popper.js/dist/umd/popper.min.js"></script>
@@ -238,7 +246,7 @@
     <script src="~/Content/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="~/Content/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script>
-(function($) {
+        (function ($) {
             "use strict";
 
             jQuery('#vmap').vectorMap({

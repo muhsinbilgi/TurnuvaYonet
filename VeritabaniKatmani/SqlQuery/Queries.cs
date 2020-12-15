@@ -9,17 +9,21 @@ namespace VeritabaniKatmani.SqlQuery
     public static class Queries
     {
 
-        public static class User
+        public static class Kullanicilar
         {
-            public static string Insert => @"INSERT INTO `user`(`KullaniciAdi`, `Sifre`) 
-                                                                 VALUES(@KullaniciAdi,@Sifre)";
-            public static string Update => @"update `user` set
+            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`) 
+                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId)";
+            public static string Update => @"update `kullanicilar` set
+                                         `AdiSoyadi` = @AdiSoyadi,
                                          `KullaniciAdi` = @KullaniciAdi,
-                                         `Sifre` = @Sifre
+                                         `Parola` = @Parola,
+                                         `Rol` = @Rol,
+                                         `TurnuvaId` = @TurnuvaId,
+                                         `SonGirisZamani` = @SonGirisZamani
                                           where Id = @Id";
-            public static string Delete => "delete from user where Id = @Id";
-            public static string GetAll => @"select * from user";
-            public static string GetbyId => "select * from user where Id = @Id";
+            public static string Delete => "delete from kullanicilar where Id = @Id";
+            public static string GetAll => @"select * from kullanicilar";
+            public static string GetbyId => "select * from kullanicilar where Id = @Id";
         }
 
         public static class Statu
