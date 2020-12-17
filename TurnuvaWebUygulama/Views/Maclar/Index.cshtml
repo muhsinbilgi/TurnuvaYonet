@@ -32,50 +32,57 @@
 
 
 
+@{ int hafta = @ViewBag.MaxHafta + 1;}
 
 
-
-
-
-
-<div class="col-lg-6">
-    <div class="card">
-        <div class="card-header">
-            <h4>1. Hafta</h4>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Tarih</th>
-                        <th scope="col">Saat</th>
-                        <th scope="col">Takım Adı</th>
-                        <th scope="col"></th>
-                        <th scope="col">Takım Adı</th>
-                        <th scope="col"></th>
-
-                    </tr>
-                </thead>
-
-                @foreach (var item in Model)
-                {
-                    <tbody>
+@{ for (int i = 1; i < hafta; i++)
+    {
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>@i Hafta</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.TarihSaat)</td>
-                            <td>@Html.DisplayFor(modelItem => item.TarihSaat)</td>
-                            <td>@Html.DisplayFor(modelItem => item.BirinciTakimAdi)</td>
-                            <td>-</td>
-                            <td>@Html.DisplayFor(modelItem => item.IkinciTakimAdi)</td>
-                            <td>@Html.ActionLink("Maç Detayı", "Detay", "Maclar", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
-
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Saat</th>
+                            <th scope="col">Takım Adı</th>
+                            <th scope="col"></th>
+                            <th scope="col">Takım Adı</th>
+                            <th scope="col"></th>
 
                         </tr>
+                    </thead>
 
-                    </tbody>
-                }
 
-            </table>
+                    @foreach (var item in Model)
+                    {
+                        if (i == item.Hafta)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Tarih)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Saat)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BirinciTakimAdi)</td>
+                                    <td>-</td>
+                                    <td>@Html.DisplayFor(modelItem => item.IkinciTakimAdi)</td>
+                                    <td>@Html.ActionLink("Maç Detayı", "Detay", "Maclar", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
+
+
+                                </tr>
+
+                            </tbody>
+                        }
+                    }
+
+
+
+                </table>
+            </div>
         </div>
     </div>
-</div>
+    }
+}
 

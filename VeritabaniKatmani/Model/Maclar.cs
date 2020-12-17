@@ -15,10 +15,31 @@ namespace VeritabaniKatmani
         public int BirinciTakimId { get; set; }
         public int IkinciTakimId { get; set; }
         public int Bay { get; set; }
-        public string Hafta { get; set; }
+        public int Hafta { get; set; }
         public int TurnuvaId { get; set; }
         public string BirinciTakimAdi { get; set; }
         public string IkinciTakimAdi { get; set; }
+
+        public int MaxHafta { get; set; }
+
+
+        public string Tarih
+        {
+            get
+            {
+                return TarihSaat.ToShortDateString();
+            }
+
+        }
+
+        public string Saat
+        {
+            get
+            {
+                return TarihSaat.ToShortTimeString();
+            }
+
+        }
 
 
 

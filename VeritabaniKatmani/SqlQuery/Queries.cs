@@ -202,7 +202,11 @@ inner join statu st on st.Id = s.Statu";
                                              from maclar m
                                              inner join takimlar t1 on t1.Id = m.BirinciTakimId
                                              inner join takimlar t2 on t2.Id = m.IkinciTakimId";
+
+         
             public static string GetbyId => "select * from maclar where Id = @Id";
+
+            public static string GetbyMax => "select max(hafta) as MaxHafta from maclar where TurnuvaId = @TurnuvaId";
         }
     }
 }

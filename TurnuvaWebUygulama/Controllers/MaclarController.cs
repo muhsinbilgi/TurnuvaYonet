@@ -14,6 +14,12 @@ namespace TurnuvaWebUygulama.Controllers
         // GET: Maclar
         public ActionResult Index()
         {
+
+            // turnuva id basılacak
+            var model = MvcDbHelper.Repository.GetById<Maclar>(Queries.Maclar.GetbyMax, new { TurnuvaId = 1 }).FirstOrDefault();
+
+            ViewBag.MaxHafta = model.MaxHafta;
+
             return View(GetMaclar());
         }
 
