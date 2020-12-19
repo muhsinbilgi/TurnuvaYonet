@@ -8,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace VeritabaniKatmani
 {
-    public class Kullanicilar : IDbModel
+    public class Turnuva : IDbModel
     {
         public int Id { get; set; }
-        public string AdiSoyadi { get; set; }
-        public string KullaniciAdi { get; set; }
-        public string Parola { get; set; }
-        public string Rol { get; set; }
-        public int TurnuvaId { get; set; }
-        public DateTime SonGirisZamani { get; set; }
-        public int TakimId { get; set; }
-        public int SeciliTurnuva { get; set; }
+        public string Adi { get; set; }
+        public int KategoriId { get; set; }
+        public int YoneticiKullaniciId { get; set; }
+        public string Logo { get; set; }
+
 
         public AbstractDapperRepository Repository { get; set; }
 

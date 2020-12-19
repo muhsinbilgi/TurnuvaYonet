@@ -26,7 +26,9 @@ namespace TurnuvaWebUygulama.Controllers
 
             if (m != null)
             {
+               
                 FormsAuthentication.SetAuthCookie(m.KullaniciAdi, false);
+                Session["KullaniciId"] = m.Id;
                 return RedirectToAction("Index", "Home");
             }
             else

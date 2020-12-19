@@ -11,8 +11,8 @@ namespace VeritabaniKatmani.SqlQuery
 
         public static class Kullanicilar
         {
-            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`) 
-                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId)";
+            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`,`SeciliTurnuva`) 
+                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId,,@SeciliTurnuva)";
             public static string Update => @"update `kullanicilar` set
                                          `AdiSoyadi` = @AdiSoyadi,
                                          `KullaniciAdi` = @KullaniciAdi,
@@ -20,8 +20,14 @@ namespace VeritabaniKatmani.SqlQuery
                                          `Rol` = @Rol,
                                          `TurnuvaId` = @TurnuvaId,
                                          `SonGirisZamani` = @SonGirisZamani,
-                                         `TakimId` = @TakimId
+                                         `TakimId` = @TakimId,
+                                         `SeciliTurnuva` = @SeciliTurnuva
                                           where Id = @Id";
+
+            public static string SecTurUpdate => @"update `kullanicilar` set
+                                         `SeciliTurnuva` = @SeciliTurnuva
+                                          where Id = @Id";
+
             public static string Delete => "delete from kullanicilar where Id = @Id";
             public static string GetAll => @"select * from kullanicilar";
             public static string GetbyId => "select * from kullanicilar where Id = @Id";
@@ -41,6 +47,22 @@ namespace VeritabaniKatmani.SqlQuery
             public static string GetAll => @"select * from statu";
             public static string GetbyId => "select * from statu where Id = @Id";
         }
+
+        public static class Turnuva
+        {
+            public static string Insert => @"INSERT INTO `turnuva`(`Adi`,`KategoriId`,`YoneticiKullaniciId`,`Logo`) 
+                                                                 VALUES(@Adi,@KategoriId,@YoneticiKullaniciId,@Logo)";
+            public static string Update => @"update `turnuva` set
+                                         `Adi` = @Adi,
+                                         `KategoriId` = @KategoriId,
+                                         `YoneticiKullaniciId` = @YoneticiKullaniciId,
+                                         `Logo` = @Logo
+                                          where Id = @Id";
+            public static string Delete => "delete from turnuva where Id = @Id";
+            public static string GetAll => @"select * from turnuva";
+            public static string GetbyId => "select * from turnuva where Id = @Id";
+            public static string GetbyUser => "select * from turnuva where YoneticiKullaniciId = @Id";
+        }                                                                        
 
         public static class Takimlar
         {

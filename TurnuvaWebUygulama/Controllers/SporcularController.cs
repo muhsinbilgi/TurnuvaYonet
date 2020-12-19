@@ -168,7 +168,7 @@ namespace TurnuvaWebUygulama.Controllers
 
 
 
-
+        [HttpPost]
         public ActionResult Sil(int Id)
         {
             Sporcular model = new Sporcular() { Id = Id };
