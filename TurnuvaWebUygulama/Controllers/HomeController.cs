@@ -27,7 +27,7 @@ namespace TurnuvaWebUygulama.Controllers
         {
             var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
 
-
+            if(m.Rol == "Y") { 
 
             List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetById<Turnuva>(Queries.Turnuva.GetbyUser, new { Id = m.Id }).ToList()
                                              select new SelectListItem
@@ -35,8 +35,22 @@ namespace TurnuvaWebUygulama.Controllers
                                                  Text = i.Adi,
                                                  Value = i.Id.ToString()
                                              }).ToList();
+                ViewBag.dgr = degerler;
+            }
+            if (m.Rol == "A")
+            {
 
-            ViewBag.dgr = degerler;
+                List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<Turnuva>(Queries.Turnuva.GetAll).ToList()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = i.Adi,
+                                                     Value = i.Id.ToString()
+                                                 }).ToList();
+                ViewBag.dgr = degerler;
+            }
+
+
+
 
             var model = MvcDbHelper.Repository.GetById<Turnuva>(Queries.Turnuva.GetbyId, new { Id = m.SeciliTurnuva }).FirstOrDefault();
            
@@ -57,14 +71,30 @@ namespace TurnuvaWebUygulama.Controllers
 
             MvcDbHelper.Repository.Update(Queries.Kullanicilar.SecTurUpdate, KulModel);
 
-            List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetById<Turnuva>(Queries.Turnuva.GetbyUser, new { Id = m.Id }).ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.Adi,
-                                                 Value = i.Id.ToString()
-                                             }).ToList();
+            if (m.Rol == "Y")
+            {
 
-            ViewBag.dgr = degerler;
+                List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetById<Turnuva>(Queries.Turnuva.GetbyUser, new { Id = m.Id }).ToList()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = i.Adi,
+                                                     Value = i.Id.ToString()
+                                                 }).ToList();
+                ViewBag.dgr = degerler;
+            }
+            if (m.Rol == "A")
+            {
+
+                List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<Turnuva>(Queries.Turnuva.GetAll).ToList()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = i.Adi,
+                                                     Value = i.Id.ToString()
+                                                 }).ToList();
+                ViewBag.dgr = degerler;
+            }
+
+     
             return View();
         }
     }

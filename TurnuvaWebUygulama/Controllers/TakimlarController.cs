@@ -138,9 +138,9 @@ namespace TurnuvaWebUygulama.Controllers
         {
             var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
 
-            if(m.Rol == "Y")
+            if(m.Rol == "Y" || m.Rol == "A")
             {
-                var takimlarResultY = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyY, new { TurnuvaId = m.TurnuvaId }).ToList();
+                var takimlarResultY = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyY, new { TurnuvaId = m.SeciliTurnuva }).ToList();
                 return takimlarResultY;
             }
             else if(m.Rol == "T")

@@ -182,25 +182,25 @@ namespace TurnuvaWebUygulama.Controllers
 
             var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
 
-            if (m.Rol == "Y")
+            if (m.Rol == "Y" || m.Rol == "A")
             {
-                var takimlarResultY = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyY, new { TurnuvaId = m.TurnuvaId }).ToList();
-                return takimlarResultY;
+                var sporcuResultY = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyY, new { TurnuvaId = m.SeciliTurnuva }).ToList();
+                return sporcuResultY;
             }
             else if (m.Rol == "T")
             {
-                var takimlarResultT = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyT, new { TakimId = m.TakimId }).ToList();
-                return takimlarResultT;
+                var sporcuResultT = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyT, new { TakimId = m.TakimId }).ToList();
+                return sporcuResultT;
             }
             else if (m.Rol == "S")
             {
-                var takimlarResultS = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyS, new { KullaniciId = m.Id }).ToList();
-                return takimlarResultS;
+                var sporcuResultS = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyS, new { KullaniciId = m.Id }).ToList();
+                return sporcuResultS;
             }
             else
             {
-                var sporcularResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
-                return sporcularResult;
+                var sporcuResult = MvcDbHelper.Repository.GetAll<Sporcular>(Queries.Sporcular.GetAll).ToList();
+                return sporcuResult;
             }
 
 

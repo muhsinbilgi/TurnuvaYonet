@@ -189,6 +189,10 @@ inner join statu st on st.Id = s.Statu";
                                              from gorevliler t 
                                              inner join gorevturu g on g.Id = t.GorevTuru
                                              where t.Id = @Id";
+            /* Yönetici için : */
+            public static string GetbyY => "select * from gorevliler s where s.TurnuvaId = @TurnuvaId";
+
+
         }
 
         public static class GorevTuru

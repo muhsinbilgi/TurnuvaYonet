@@ -130,8 +130,23 @@ namespace TurnuvaWebUygulama.Controllers
 
         public List<Gorevliler> GetGorevliler()
         {
-            var gorevlilerResult = MvcDbHelper.Repository.GetAll<Gorevliler>(Queries.Gorevliler.GetAll).ToList();
-            return gorevlilerResult;
+
+
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+
+            if (m.Rol == "Y" || m.Rol == "A")
+            {
+                var gorevlilerResultY = MvcDbHelper.Repository.GetById<Gorevliler>(Queries.Gorevliler.GetbyY, new { TurnuvaId = m.SeciliTurnuva }).ToList();
+                return gorevlilerResultY;
+            }  
+            else
+            {
+                var gorevlilerResult = MvcDbHelper.Repository.GetAll<Gorevliler>(Queries.Gorevliler.GetAll).ToList();
+                return gorevlilerResult;
+            }
+
+
+           
         }
     }
 }

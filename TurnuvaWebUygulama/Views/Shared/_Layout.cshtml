@@ -167,11 +167,12 @@
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> @User.Identity.Name </a>
 
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Bildirimler <span class="count">13</span></a>
-
-                            <a class="nav-link" href="/Home/Ayarlar"><i class="fa fa-user"></i> Ayarlar </a>
-
-                            <a class="nav-link" href="/Login/Logout"><i class="fa fa-power-off"></i> Çıkış</a>
-                        </div>
+                            @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("H"))
+                            {
+                                <a class="nav-link" href="/Home/Ayarlar"><i class="fa fa-user"></i> Turnuva Seç </a>
+                            }
+                                <a class="nav-link" href="/Login/Logout"><i class="fa fa-power-off"></i> Çıkış</a>
+                            </div>
                     </div>
                 </div>
 
