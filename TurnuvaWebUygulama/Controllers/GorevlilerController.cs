@@ -55,8 +55,8 @@ namespace TurnuvaWebUygulama.Controllers
 
 
             }
-           
-            model.TurnuvaId = 1;
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+            model.TurnuvaId = m.SeciliTurnuva;
             MvcDbHelper.Repository.Insert(Queries.Gorevliler.Insert, model);
             ViewBag.Basari = 1;
             ViewBag.dgr = degerler;

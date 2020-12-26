@@ -12,7 +12,7 @@ namespace VeritabaniKatmani.SqlQuery
         public static class Kullanicilar
         {
             public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`,`SeciliTurnuva`) 
-                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId,,@SeciliTurnuva)";
+                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId,@SeciliTurnuva)";
             public static string Update => @"update `kullanicilar` set
                                          `AdiSoyadi` = @AdiSoyadi,
                                          `KullaniciAdi` = @KullaniciAdi,
@@ -32,6 +32,7 @@ namespace VeritabaniKatmani.SqlQuery
             public static string GetAll => @"select * from kullanicilar";
             public static string GetbyId => "select * from kullanicilar where Id = @Id";
 
+            public static string GetbyMaxId => "select Max(Id) as MaxId from kullanicilar";
             public static string GetbyName => "select * from kullanicilar where KullaniciAdi = @KullaniciAdi";
 
         }
@@ -46,6 +47,18 @@ namespace VeritabaniKatmani.SqlQuery
             public static string Delete => "delete from statu where Id = @Id";
             public static string GetAll => @"select * from statu";
             public static string GetbyId => "select * from statu where Id = @Id";
+        }
+
+        public static class EvrakTuru
+        {
+            public static string Insert => @"INSERT INTO `evrakturu`(`Adi`) 
+                                                                 VALUES(@Adi)";
+            public static string Update => @"update `evrakturu` set
+                                         `Adi` = @Adi
+                                          where Id = @Id";
+            public static string Delete => "delete from evrakturu where Id = @Id";
+            public static string GetAll => @"select * from evrakturu";
+            public static string GetbyId => "select * from evrakturu where Id = @Id";
         }
 
         public static class Turnuva
@@ -234,5 +247,61 @@ inner join statu st on st.Id = s.Statu";
 
             public static string GetbyMax => "select max(hafta) as MaxHafta from maclar where TurnuvaId = @TurnuvaId";
         }
+
+
+
+        public static class Evrak
+        {
+            public static string Insert => @"INSERT INTO `evrak`(`SporcuId`,`EvrakTuru`,`EvrakAdi`) 
+                                                                 VALUES(@SporcuId,@EvrakTuru,@EvrakAdi)";
+            public static string Update => @"update `evrak` set
+                                         `SporcuId` = @SporcuId,
+                                          `EvrakTuru`= @EvrakTuru,
+                                          `EvrakAdi`= @EvrakAdi
+                                           where Id = @Id";
+            public static string Delete => "delete from evrak where Id = @Id";
+            public static string GetAll => @"select * from evrak";
+            public static string GetbyId => "select * from evrak where Id = @Id";
+            public static string GetbyCount => "select count(*) as Sayi from evrak where SporcuId = @Id";
+            public static string GetbySporcuId => @"select
+                                                    e.*,
+                                                    t.Adi as EvrakTuruAdi
+                                                    from evrak e
+                                                    inner join EvrakTuru t on t.Id = e.EvrakTuru
+                                                    where SporcuId = @Id";
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

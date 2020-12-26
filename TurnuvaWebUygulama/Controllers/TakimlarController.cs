@@ -38,6 +38,7 @@ namespace TurnuvaWebUygulama.Controllers
         [HttpPost]
         public ActionResult Ekle(Takimlar model, HttpPostedFileBase file)
         {
+
             List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<Kategori>(Queries.Kategori.GetAll).ToList()
                                              select new SelectListItem
                                              {
@@ -59,8 +60,8 @@ namespace TurnuvaWebUygulama.Controllers
 
 
             }
-
-            model.TurnuvaId = 1;
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+            model.TurnuvaId = m.SeciliTurnuva;
             MvcDbHelper.Repository.Insert(Queries.Takimlar.Insert, model);
             ViewBag.Basari = 1;
             ViewBag.dgr = degerler;
@@ -70,9 +71,14 @@ namespace TurnuvaWebUygulama.Controllers
 
         public ActionResult Detay(int Id)
         {
-       
+            TakimSporcu model = new TakimSporcu();
 
-            var model = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyId, new { Id = Id }).FirstOrDefault();
+            
+
+            model.Takimlar = MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyId, new { Id = Id }).FirstOrDefault();
+            model.Sporcular = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyT, new { TakimId = Id }).ToList();
+
+            
             return View(model);
         }
 

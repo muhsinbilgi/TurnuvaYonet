@@ -92,16 +92,21 @@
   <ItemGroup>
     <Compile Include="Interface\IDbModel.cs" />
     <Compile Include="Model\Detay.cs" />
+    <Compile Include="Model\Evrak.cs" />
+    <Compile Include="Model\EvrakTuru.cs" />
     <Compile Include="Model\Gorevliler.cs" />
     <Compile Include="Model\GorevTuru.cs" />
     <Compile Include="Model\Kategori.cs" />
+    <Compile Include="Model\KayitSayi.cs" />
     <Compile Include="Model\Kullanicilar.cs" />
     <Compile Include="Model\MacDetay.cs" />
     <Compile Include="Model\MacGorevlileri.cs" />
     <Compile Include="Model\Maclar.cs" />
+    <Compile Include="Model\SporcuEvrak.cs" />
     <Compile Include="Model\Sporcular.cs" />
     <Compile Include="Model\Statu.cs" />
     <Compile Include="Model\Takimlar.cs" />
+    <Compile Include="Model\TakimSporcu.cs" />
     <Compile Include="Model\Turnuva.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

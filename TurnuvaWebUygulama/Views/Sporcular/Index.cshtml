@@ -21,7 +21,7 @@
                 <ol class="breadcrumb text-right">
                     @if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("T"))
                     {
-                        <li class="active">@Html.ActionLink("Sporcu Ekle", "Ekle", "Sporcu", new { @class = "btn btn-success" })</li>
+                        <li class="active">@Html.ActionLink("Sporcu Ekle", "Ekle", "Sporcu", new { @class = "btn btn-success btn-lg" })</li>
                     }
                     </ol>
             </div>
@@ -60,6 +60,7 @@
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
 
@@ -71,20 +72,20 @@
                             <td>@Html.DisplayFor(modelItem => item.Adi) @Html.DisplayFor(modelItem => item.Soyadi)</td>
                             <td>@Html.DisplayFor(modelItem => item.TakimAdi)</td>
                             <td>@Html.DisplayFor(modelItem => item.DogumYeri)</td>
-                            <td>@Html.ActionLink("Detay", "Detay", "Sporcular", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
-                            <td>@Html.ActionLink("Düzenle", "Duzenle", "Sporcular", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+                            <td>@Html.ActionLink("Detay", "Detay", "Sporcular", new { id = item.Id }, new { @class = "btn btn-secondary btn-sm" })</td>
+                            <td>@Html.ActionLink("Düzenle", "Duzenle", "Sporcular", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })</td>
                             <td>
 
                                 @using (Html.BeginForm("Sil", "Sporcular", new { Id = item.Id }, FormMethod.Post))
                                 {
                                     if (User.IsInRole("A") || User.IsInRole("Y") || User.IsInRole("T"))
                                     {
-                                    <button class="btn btn-danger">Sil</button>
+                                        <button class="btn btn-danger btn-sm">Sil</button>
                                     }
                                 }
 
                             </td>
-
+                            <td>@Html.ActionLink("Evrak Ekle", "EvrakEkle", "Sporcular", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })</td>
 
                         </tr>
 

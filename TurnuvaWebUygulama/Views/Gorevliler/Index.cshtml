@@ -18,7 +18,7 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <li class="active">@Html.ActionLink("Görevli Ekle", "Ekle", "Gorevliler", new { @class = "btn btn-success" })</li>
+                    <li class="active">@Html.ActionLink("Görevli Ekle", "Ekle", "Gorevliler", new { @class = "btn btn-success btn-lg" })</li>
                 </ol>
             </div>
         </div>
@@ -47,11 +47,11 @@
                             <td><img src="~/Image/@Html.DisplayFor(modelItem => item.Resim)" width="25" height="25" /></td>
                             <td>@Html.DisplayFor(modelItem => item.Adi) @Html.DisplayFor(modelItem => item.Soyadi)</td>
                             <td>@Html.DisplayFor(modelItem => item.GorevAdi)</td>
-                            <td align="right">@Html.ActionLink("Düzenle", "Duzenle", "Gorevliler", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+                            <td align="right">@Html.ActionLink("Düzenle", "Duzenle", "Gorevliler", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })</td>
                             <td align="left">
                                 @using (Html.BeginForm("Sil", "Gorevliler", new { Id = item.Id }, FormMethod.Post))
                                 {
-                                    <button class="btn btn-danger">Sil</button>
+                                    <button class="btn btn-danger btn-sm">Sil</button>
                                 }
 
                             </td>

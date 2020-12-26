@@ -73,6 +73,18 @@ namespace TurnuvaWebUygulama.Controllers
                                              }).ToList();
 
             ViewBag.dgr = degerler;
+
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+            List<SelectListItem> Takimlar = (from i in  MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyY, new { TurnuvaId = m.SeciliTurnuva }).ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.Adi,
+                                                 Value = i.Id.ToString()
+                                             }).ToList();
+
+            ViewBag.Takimlar = Takimlar;
+
+
             return View();
         }
 
@@ -80,7 +92,88 @@ namespace TurnuvaWebUygulama.Controllers
         [HttpPost]
         public ActionResult Ekle(Sporcular model, HttpPostedFileBase file)
         {
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
             List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<Statu>(Queries.Statu.GetAll).ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.Adi,
+                                                 Value = i.Id.ToString()
+                                             }).ToList();
+
+            List<SelectListItem> Takimlar = (from i in MvcDbHelper.Repository.GetById<Takimlar>(Queries.Takimlar.GetbyY, new { TurnuvaId = m.SeciliTurnuva }).ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.Adi,
+                                                 Value = i.Id.ToString()
+                                             }).ToList();
+
+            
+
+
+
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    model.Resim = model.Adi + model.Soyadi + "Resim" + file.FileName;
+
+                    file.SaveAs(HttpContext.Server.MapPath("~/Image/")
+                                                          + model.Resim);
+                   
+
+                }
+
+
+            }
+           
+            if(model.TakimId == 0)
+            {
+                model.TakimId = m.TakimId;
+            }
+
+            Kullanicilar Kullanici = new Kullanicilar();
+            Kullanici.AdiSoyadi = model.Adi + ' ' + model.Soyadi;
+            Kullanici.KullaniciAdi = model.Adi.Substring(0, 1) + model.Soyadi.ToLower();
+            Kullanici.Parola = model.Adi + 123;
+            Kullanici.Rol = "S";
+            Kullanici.TurnuvaId = m.SeciliTurnuva;
+            Kullanici.TakimId = model.TakimId;
+            Kullanici.SeciliTurnuva = m.SeciliTurnuva;
+
+            MvcDbHelper.Repository.Insert(Queries.Kullanicilar.Insert, Kullanici);
+
+            var MaxId = MvcDbHelper.Repository.GetAll<Kullanicilar>(Queries.Kullanicilar.GetbyMaxId).FirstOrDefault();
+
+            model.KullaniciId = MaxId.MaxId;
+            model.TurnuvaId = m.SeciliTurnuva;
+            MvcDbHelper.Repository.Insert(Queries.Sporcular.Insert, model);
+            ViewBag.Basari = 1;
+            ViewBag.KullaniciAdi = Kullanici.KullaniciAdi;
+            ViewBag.Parola = Kullanici.Parola;
+            ViewBag.dgr = degerler;
+            ViewBag.Takimlar = Takimlar;
+            return View();
+
+        }
+
+        public ActionResult EvrakEkle()
+        {
+            List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<EvrakTuru>(Queries.EvrakTuru.GetAll).ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.Adi,
+                                                 Value = i.Id.ToString()
+                                             }).ToList();
+
+            ViewBag.dgr = degerler;
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult EvrakEkle(Evrak model, HttpPostedFileBase Evrak, int Id)
+        {
+            List<SelectListItem> degerler = (from i in MvcDbHelper.Repository.GetAll<EvrakTuru>(Queries.EvrakTuru.GetAll).ToList()
                                              select new SelectListItem
                                              {
                                                  Text = i.Adi,
@@ -91,31 +184,45 @@ namespace TurnuvaWebUygulama.Controllers
 
             if (ModelState.IsValid)
             {
-                if (file != null)
+                if (Evrak != null)
                 {
-                    file.SaveAs(HttpContext.Server.MapPath("~/Image/")
-                                                          + file.FileName);
-                    model.Resim = file.FileName;
+                    model.EvrakAdi = Id + model.EvrakTuru + Evrak.FileName;
+                    Evrak.SaveAs(HttpContext.Server.MapPath("~/Image/")
+                                                          + model.EvrakAdi);
+                    
 
                 }
 
 
             }
-            model.KullaniciId = 1;
-            model.TakimId = 1;
-            model.TurnuvaId = 1;
-            MvcDbHelper.Repository.Insert(Queries.Sporcular.Insert, model);
+            model.SporcuId = Id;
+            MvcDbHelper.Repository.Insert(Queries.Evrak.Insert, model);
             ViewBag.Basari = 1;
             ViewBag.dgr = degerler;
-            return View();
+            return RedirectToAction("EvrakEkle");
 
         }
+
+
+
+
+
+
 
 
         public ActionResult Detay(int Id)
         {
 
-            var model = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyId, new { Id = Id }).FirstOrDefault();
+            SporcuEvrak model = new SporcuEvrak();
+
+       
+            model.Sporcular = MvcDbHelper.Repository.GetById<Sporcular>(Queries.Sporcular.GetbyId, new { Id = Id }).FirstOrDefault();
+            model.Evrak = MvcDbHelper.Repository.GetById<Evrak>(Queries.Evrak.GetbySporcuId, new { Id = Id }).ToList();
+
+            var KayitSayi = MvcDbHelper.Repository.GetById<KayitSayi>(Queries.Evrak.GetbyCount, new { Id = Id }).FirstOrDefault();
+
+            ViewBag.ks = KayitSayi.Sayi;
+
             return View(model);
         }
 

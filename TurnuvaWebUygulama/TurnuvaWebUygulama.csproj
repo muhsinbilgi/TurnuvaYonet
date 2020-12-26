@@ -2853,6 +2853,7 @@
     <Content Include="Views\Maclar\Index.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Ayarlar.cshtml" />
+    <Content Include="Views\Sporcular\EvrakEkle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@model VeritabaniKatmani.Sporcular
+﻿@model VeritabaniKatmani.SporcuEvrak
 
 @{
     ViewBag.Title = "Detay";
@@ -6,53 +6,115 @@
 }
 
 
-    <div class="col-md-4">
-        <aside class="profile-nav alt">
-            <section class="card">
-                <div class="card-header user-header alt bg-dark">
-                    <div class="media">
-                        <a href="#">
-                            <img class="rounded-circle mx-auto d-block" src="~/Image/@Html.DisplayFor(model => model.Resim)" alt="Card image cap" />
-                        </a>
-                        <div class="media-body">
-                            <h2 class="text-light display-6">@Html.DisplayFor(model => model.Adi) @Html.DisplayFor(model => model.Soyadi)</h2>
-                            <p>@Html.DisplayFor(model => model.Mevki)</p>
-                        </div>
+<div class="col-md-4">
+    <aside class="profile-nav alt">
+        <section class="card">
+            <div class="card-header user-header alt bg-dark">
+                <div class="media">
+                    <a href="#">
+                        <img class="rounded-circle mx-auto d-block" src="~/Image/@Html.DisplayFor(model => model.Sporcular.Resim)" alt="Card image cap" />
+                    </a>
+                    <div class="media-body">
+                        <h2 class="text-light display-6">@Html.DisplayFor(model => model.Sporcular.Adi) @Html.DisplayFor(model => model.Sporcular.Soyadi)</h2>
+                        <p>@Html.DisplayFor(model => model.Sporcular.Mevki)</p>
                     </div>
                 </div>
+            </div>
 
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <i class="fa fa-map-marker"></i>  @Html.DisplayFor(model => model.DogumYeri)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-calendar"></i> @Html.DisplayFor(model => model.DogumTarihi)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-phone"></i> @Html.DisplayFor(model => model.Telefon)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-envelope"></i> @Html.DisplayFor(model => model.Email)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-th-large"></i> @Html.DisplayFor(model => model.StatuAdi)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-sort-numeric-asc"></i> @Html.DisplayFor(model => model.LisansNo)
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fa fa-users"></i> @Html.DisplayFor(model => model.TakimAdi)
-                    </li>
-                 
-                    <li class="list-group-item">
-                        <div class="list-group-item text-sm-center">
-                            @Html.ActionLink("Sporcular", "Index", "Sporcular", null, new { @class = "btn btn-primary btn-lg" })
-                        </div>
-                    </li>
-                </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <i class="fa fa-map-marker"></i>  @Html.DisplayFor(model => model.Sporcular.DogumYeri)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-calendar"></i> @Html.DisplayFor(model => model.Sporcular.DogumTarihi)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-phone"></i> @Html.DisplayFor(model => model.Sporcular.Telefon)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-envelope"></i> @Html.DisplayFor(model => model.Sporcular.Email)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-th-large"></i> @Html.DisplayFor(model => model.Sporcular.StatuAdi)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-sort-numeric-asc"></i> @Html.DisplayFor(model => model.Sporcular.LisansNo)
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-users"></i> @Html.DisplayFor(model => model.Sporcular.TakimAdi)
+                </li>
 
-            </section>
-        </aside>
-       
+                <li class="list-group-item">
+                    <div class="list-group-item text-sm-center">
+                        @Html.ActionLink("Sporcular", "Index", "Sporcular", null, new { @class = "btn btn-primary btn-lg" })
+                    </div>
+                </li>
+            </ul>
+
+        </section>
+    </aside>
+
+</div>
+
+
+
+
+<div class="col-lg-6">
+    <div class="card">
+    <div class="card-header">
+        Sporcu Evrakları
     </div>
+        <div class="card-body">
+        
+            <div id="pay-invoice">
+                <div class="card-body">
+
+                    @if(@ViewBag.ks == 0) { <span>Hiç Evrak Yok.</span>}
+                        <table border="0">
+
+                            @foreach (var item in Model.Evrak)
+                            {
+                                <thead>
+                                    <tr>
+                                        @{
+                                            string[] hobiListe = item.EvrakAdi.Split('.');
+                                            if (hobiListe[1] == "pdf")
+                                            {
+
+                                                <td><img src="~/Image/icon/pdf.png" width="50" height="50" /></td>
+
+                                            }
+                                            else if (hobiListe[1] == "jpg" || hobiListe[1] == "png" || hobiListe[1] == "jpeg" || hobiListe[1] == "gif")
+                                            {
+
+                                                <td><img src="~/Image/icon/resim.png" width="50" height="50" /></td>
+
+                                            }
+                                            else
+                                            {
+
+                                                <td><img src="~/Image/icon/dosya.png" width="50" height="50" /></td>
+
+                                            }}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="~/Image/@Html.DisplayFor(modelItem => item.EvrakAdi)" download>@Html.DisplayFor(modelItem => item.EvrakTuruAdi)</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- .card -->
+
+</div>
+
