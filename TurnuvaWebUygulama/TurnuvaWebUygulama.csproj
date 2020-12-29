@@ -130,10 +130,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GorevlilerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KullanicilarController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MaclarController.cs" />
     <Compile Include="Controllers\SporcularController.cs" />
     <Compile Include="Controllers\TakimlarController.cs" />
+    <Compile Include="Controllers\TurnuvaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2854,6 +2856,12 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Ayarlar.cshtml" />
     <Content Include="Views\Sporcular\EvrakEkle.cshtml" />
+    <Content Include="Views\Turnuva\Index.cshtml" />
+    <Content Include="Views\Turnuva\Ekle.cshtml" />
+    <Content Include="Views\Turnuva\Duzenle.cshtml" />
+    <Content Include="Views\Kullanicilar\Index.cshtml" />
+    <Content Include="Views\Kullanicilar\Ekle.cshtml" />
+    <Content Include="Views\Kullanicilar\Duzenle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

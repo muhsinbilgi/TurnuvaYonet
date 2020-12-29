@@ -15,6 +15,9 @@ namespace VeritabaniKatmani
         public int KategoriId { get; set; }
         public int YoneticiKullaniciId { get; set; }
         public string Logo { get; set; }
+        public string KategoriAdi { get; set; }
+        public string YoneticiAdi { get; set; }
+
 
 
         public AbstractDapperRepository Repository { get; set; }

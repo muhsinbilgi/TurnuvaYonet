@@ -94,6 +94,18 @@
                             <a href="/Gorevliler"> <i class="menu-icon ti-user"></i>Hakem & Görevli </a>
                         </li>
                     }
+                    @if (User.IsInRole("A"))
+                    {
+                        <li>
+                            <a href="/Turnuva"> <i class="menu-icon ti-user"></i>Turnuva</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("A") || User.IsInRole("Y"))
+                    {
+                        <li>
+                            <a href="/Kullanicilar"> <i class="menu-icon ti-user"></i>Kullanıcı Tn.</a>
+                        </li>
+                    }
                     <h3 class="menu-title">Ekstra</h3><!-- /.menu-title -->
                     <li>
                         <a href="widgets.html"> <i class="menu-icon ti-book"></i>Kurallar </a>

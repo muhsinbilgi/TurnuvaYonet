@@ -166,6 +166,7 @@ namespace TurnuvaWebUygulama.Controllers
                                              }).ToList();
 
             ViewBag.dgr = degerler;
+           
             return View();
         }
 
@@ -199,7 +200,7 @@ namespace TurnuvaWebUygulama.Controllers
             MvcDbHelper.Repository.Insert(Queries.Evrak.Insert, model);
             ViewBag.Basari = 1;
             ViewBag.dgr = degerler;
-            return RedirectToAction("EvrakEkle");
+            return View();
 
         }
 

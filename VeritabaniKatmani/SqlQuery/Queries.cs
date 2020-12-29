@@ -11,8 +11,8 @@ namespace VeritabaniKatmani.SqlQuery
 
         public static class Kullanicilar
         {
-            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`,`SeciliTurnuva`) 
-                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId,@SeciliTurnuva)";
+            public static string Insert => @"INSERT INTO `kullanicilar`(`AdiSoyadi`, `KullaniciAdi`, `Parola`, `Rol`, `TurnuvaId`,`TakimId`,`SeciliTurnuva`,`Resim`) 
+                                                                 VALUES(@AdiSoyadi,@KullaniciAdi,@Parola,@Rol,@TurnuvaId,@TakimId,@SeciliTurnuva, @Resim)";
             public static string Update => @"update `kullanicilar` set
                                          `AdiSoyadi` = @AdiSoyadi,
                                          `KullaniciAdi` = @KullaniciAdi,
@@ -21,7 +21,8 @@ namespace VeritabaniKatmani.SqlQuery
                                          `TurnuvaId` = @TurnuvaId,
                                          `SonGirisZamani` = @SonGirisZamani,
                                          `TakimId` = @TakimId,
-                                         `SeciliTurnuva` = @SeciliTurnuva
+                                         `SeciliTurnuva` = @SeciliTurnuva,
+                                          `Resim` = @Resim
                                           where Id = @Id";
 
             public static string SecTurUpdate => @"update `kullanicilar` set
@@ -33,7 +34,31 @@ namespace VeritabaniKatmani.SqlQuery
             public static string GetbyId => "select * from kullanicilar where Id = @Id";
 
             public static string GetbyMaxId => "select Max(Id) as MaxId from kullanicilar";
-            public static string GetbyName => "select * from kullanicilar where KullaniciAdi = @KullaniciAdi";
+            public static string GetbyName => @"select
+                                                k.*,
+                                                r.RolAciklama
+                                                from kullanicilar k
+                                                inner join Rol r on r.RolAdi = k.Rol
+                                                where k.KullaniciAdi = @KullaniciAdi";
+
+            public static string GetbyYon => @"select
+                                                k.*,
+                                                r.RolAciklama
+                                                from kullanicilar k
+                                                inner join Rol r on r.RolAdi = k.Rol
+                                                where k.Rol = @Rol";
+             public static string GetbyY => @"select
+                                                k.*,
+                                                r.RolAciklama
+                                                from kullanicilar k
+                                                inner join Rol r on r.RolAdi = k.Rol
+                                                where k.TurnuvaId != 0 and k.TurnuvaId = @TurnuvaId";
+            public static string GetbyA => @"select
+                                                k.*,
+                                                r.RolAciklama
+                                                from kullanicilar k
+                                                inner join Rol r on r.RolAdi = k.Rol
+                                                where k.TurnuvaId = @TurnuvaId";
 
         }
 
@@ -72,7 +97,13 @@ namespace VeritabaniKatmani.SqlQuery
                                          `Logo` = @Logo
                                           where Id = @Id";
             public static string Delete => "delete from turnuva where Id = @Id";
-            public static string GetAll => @"select * from turnuva";
+            public static string GetAll => @"select
+                                             t.*,
+                                             k.Adi as KategoriAdi,
+                                             u.AdiSoyadi as YoneticiAdi
+                                             from turnuva t
+                                             inner join kategori k on k.Id = t.KategoriId
+                                             inner join kullanicilar u on u.Id = t.YoneticiKullaniciId";
             public static string GetbyId => "select * from turnuva where Id = @Id";
             public static string GetbyUser => "select * from turnuva where YoneticiKullaniciId = @Id";
         }                                                                        
@@ -273,7 +304,12 @@ inner join statu st on st.Id = s.Statu";
 
         }
 
+        public static class Rol
+        {
+ 
+            public static string GetAll => @"select * from rol where Yetki = 1";
 
+        }
 
 
 
