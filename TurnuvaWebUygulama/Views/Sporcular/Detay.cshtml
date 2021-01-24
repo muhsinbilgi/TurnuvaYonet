@@ -44,13 +44,52 @@
                 <li class="list-group-item">
                     <i class="fa fa-users"></i> @Html.DisplayFor(model => model.Sporcular.TakimAdi)
                 </li>
+                @if (@ViewBag.onay == 1)
+                {
+                    <li class="list-group-item">
+                        <i class="fa fa-check-square-o"></i> <span class="badge badge-success">Onaylı</span>
+                    </li>
+                }
+                @if (@ViewBag.onay == 2)
+                {
+                    <li class="list-group-item">
+                        <i class="fa fa-exclamation-triangle"></i> <span class="badge badge-danger">Reddedildi</span>
+                    </li>
+                }
 
-                <li class="list-group-item">
-                    <div class="list-group-item text-sm-center">
-                        @Html.ActionLink("Sporcular", "Index", "Sporcular", null, new { @class = "btn btn-primary btn-lg" })
-                    </div>
-                </li>
             </ul>
+
+
+            <div class="card-footer">
+                <table border="0">
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Sporcular", "Index", "Sporcular", null, new { @class = "btn btn-primary btn-sm" })
+                        </td>
+
+                            <td>
+                                @using (Html.BeginForm("Onay", "Sporcular", new { Id = @Html.DisplayFor(model => model.Sporcular.Id) }, FormMethod.Post))
+                                {
+                                    if (User.IsInRole("Y") || User.IsInRole("A"))
+                                    {
+                                        <button class="btn btn-success btn-sm">Onayla</button>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Red", "Sporcular", new { Id = @Html.DisplayFor(model => model.Sporcular.Id) }, FormMethod.Post))
+                                {
+                                    if (User.IsInRole("Y") || User.IsInRole("A"))
+                                    {
+                                        <button class="btn btn-danger btn-sm">Reddet</button>
+                                    }
+                                }
+                            </td>
+                        
+                    </tr>
+                </table>
+
+            </div>
 
         </section>
     </aside>
@@ -62,52 +101,53 @@
 
 <div class="col-lg-6">
     <div class="card">
-    <div class="card-header">
-        Sporcu Evrakları
-    </div>
+        <div class="card-header">
+            Sporcu Evrakları
+        </div>
         <div class="card-body">
-        
+
             <div id="pay-invoice">
                 <div class="card-body">
 
-                    @if(@ViewBag.ks == 0) { <span>Hiç Evrak Yok.</span>}
-                        <table border="0">
+                    @if (@ViewBag.ks == 0)
+                    {<span>Hiç Evrak Yok.</span>}
+                    <table border="0">
 
-                            @foreach (var item in Model.Evrak)
-                            {
-                                <thead>
-                                    <tr>
-                                        @{
-                                            string[] hobiListe = item.EvrakAdi.Split('.');
-                                            if (hobiListe[1] == "pdf")
-                                            {
+                        @foreach (var item in Model.Evrak)
+                        {
+                            <thead>
+                                <tr>
+                                    @{
+                                        string[] hobiListe = item.EvrakAdi.Split('.');
+                                        if (hobiListe[1] == "pdf")
+                                        {
 
-                                                <td><img src="~/Image/icon/pdf.png" width="50" height="50" /></td>
+                                            <td><img src="~/Image/icon/pdf.png" width="50" height="50" /></td>
 
-                                            }
-                                            else if (hobiListe[1] == "jpg" || hobiListe[1] == "png" || hobiListe[1] == "jpeg" || hobiListe[1] == "gif")
-                                            {
+                                        }
+                                        else if (hobiListe[1] == "jpg" || hobiListe[1] == "png" || hobiListe[1] == "jpeg" || hobiListe[1] == "gif")
+                                        {
 
-                                                <td><img src="~/Image/icon/resim.png" width="50" height="50" /></td>
+                                            <td><img src="~/Image/icon/resim.png" width="50" height="50" /></td>
 
-                                            }
-                                            else
-                                            {
+                                        }
+                                        else
+                                        {
 
-                                                <td><img src="~/Image/icon/dosya.png" width="50" height="50" /></td>
+                                            <td><img src="~/Image/icon/dosya.png" width="50" height="50" /></td>
 
-                                            }}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <a href="~/Image/@Html.DisplayFor(modelItem => item.EvrakAdi)" download>@Html.DisplayFor(modelItem => item.EvrakTuruAdi)</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            }
-                        </table>
+                                        }}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="~/Image/@Html.DisplayFor(modelItem => item.EvrakAdi)" download>@Html.DisplayFor(modelItem => item.EvrakTuruAdi)</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
 
 
                 </div>

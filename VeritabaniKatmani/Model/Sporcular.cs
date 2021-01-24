@@ -25,7 +25,7 @@ namespace VeritabaniKatmani
         public int TakimId { get; set; }
         public int TurnuvaId { get; set; }
         public string TakimAdi { get; set; }
-        
+        public int Onay { get; set; }
        public string StatuAdi { get; set; }
    
     public AbstractDapperRepository Repository { get; set; }

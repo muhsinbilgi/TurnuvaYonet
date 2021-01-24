@@ -96,6 +96,9 @@
     <Compile Include="Model\EvrakTuru.cs" />
     <Compile Include="Model\Gorevliler.cs" />
     <Compile Include="Model\GorevTuru.cs" />
+    <Compile Include="Model\GrupAdlari.cs" />
+    <Compile Include="Model\Gruplar.cs" />
+    <Compile Include="Model\GrupListele.cs" />
     <Compile Include="Model\Kategori.cs" />
     <Compile Include="Model\KayitSayi.cs" />
     <Compile Include="Model\Kullanicilar.cs" />

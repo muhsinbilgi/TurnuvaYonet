@@ -171,6 +171,10 @@ namespace VeritabaniKatmani.SqlQuery
                                             `TakimId` = @TakimId
                                             WHERE `Id` = @Id;";
             public static string Delete => "delete from sporcular where Id = @Id";
+            public static string Onay => @"update sporcular set 
+                                           onay = @onay
+                                           where Id = @Id";
+
             public static string GetAll => @"select
 s.*,
 t.Adi as TakımAdi,
@@ -311,9 +315,31 @@ inner join statu st on st.Id = s.Statu";
 
         }
 
+        public static class Gruplar
+        {
+            public static string Insert => @"INSERT INTO `gruplar`(`GrupId`, `TakimId`, `TurnuvaId`) 
+                                                                 VALUES(@GrupId,@TakimId,@TurnuvaId)";
 
 
+            public static string Delete => "delete from gruplar where Id = @Id";
+            public static string GetAll => @"select
+                                           t.Adi as TakimAdi,
+                                           g.*
+                                           from gruplar g
+                                           inner join takimlar t on t.id = g.TakimId
+                                           where g.TurnuvaId = @Id";
+            public static string GetbyId => "select * from gruplar where Id = @Id";
 
+            public static string GetMaxGrup => "select COUNT(*) as MaxGrup from (select * from gruplar group by GrupId) as grp where TurnuvaId = @TurnuvaId";
+
+         
+        }
+
+        public static class GrupAdlari
+        {
+            public static string GetbyId => "select GrupId from gruplar where TurnuvaId = @TurnuvaId group by GrupId";
+
+        }
 
 
 

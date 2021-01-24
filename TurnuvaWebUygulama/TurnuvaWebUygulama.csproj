@@ -2862,6 +2862,7 @@
     <Content Include="Views\Kullanicilar\Index.cshtml" />
     <Content Include="Views\Kullanicilar\Ekle.cshtml" />
     <Content Include="Views\Kullanicilar\Duzenle.cshtml" />
+    <Content Include="Views\Maclar\Gruplar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2880,17 +2881,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VeritabaniKatmani\VeritabaniKatmani.csproj">
-      <Project>{1cb895ce-8fc9-47fa-9070-b1f6ac2c2614}</Project>
-      <Name>VeritabaniKatmani</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Content\vendors\popper.js\packages\popper\index.d.ts" />
     <TypeScriptCompile Include="Content\vendors\popper.js\packages\tooltip\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OperasyonKatmani\OperasyonKatmani.csproj">
+      <Project>{2f9b3f42-93a1-41ff-86d5-84504a58fd8b}</Project>
+      <Name>OperasyonKatmani</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VeritabaniKatmani\VeritabaniKatmani.csproj">
+      <Project>{1cb895ce-8fc9-47fa-9070-b1f6ac2c2614}</Project>
+      <Name>VeritabaniKatmani</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -114,6 +114,21 @@ namespace VeritabaniKatmani.Repository
 
         }
 
+        public void Onay<TEntity>(string sqlQuery, TEntity item) where TEntity : IDbModel
+        {
+            try
+            {
+                DbConnection.Execute(sqlQuery, item);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+
+
 
 
 

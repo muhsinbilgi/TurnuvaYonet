@@ -223,6 +223,7 @@ namespace TurnuvaWebUygulama.Controllers
             var KayitSayi = MvcDbHelper.Repository.GetById<KayitSayi>(Queries.Evrak.GetbyCount, new { Id = Id }).FirstOrDefault();
 
             ViewBag.ks = KayitSayi.Sayi;
+            ViewBag.onay = model.Sporcular.Onay;
 
             return View(model);
         }
@@ -281,6 +282,21 @@ namespace TurnuvaWebUygulama.Controllers
         {
             Sporcular model = new Sporcular() { Id = Id };
             MvcDbHelper.Repository.Delete<Sporcular>(Queries.Sporcular.Delete, model);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Onay(int Id)
+        {
+            int onay = 1;
+            Sporcular model = new Sporcular() { Id = Id, Onay = onay };
+            MvcDbHelper.Repository.Onay<Sporcular>(Queries.Sporcular.Onay, model);
+            return RedirectToAction("Index");
+        }
+        public ActionResult Red(int Id)
+        {
+            int onay = 2;
+            Sporcular model = new Sporcular() { Id = Id, Onay = onay };
+            MvcDbHelper.Repository.Onay<Sporcular>(Queries.Sporcular.Onay, model);
             return RedirectToAction("Index");
         }
 
