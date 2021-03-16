@@ -342,6 +342,16 @@ inner join statu st on st.Id = s.Statu";
         }
 
 
+        public static class MacHaftalari
+        {
+            public static string GetbyId => "select Hafta from maclar where TurnuvaId = @TurnuvaId group by Hafta";
+
+        }
+
+
+
+        
+
 
 
 

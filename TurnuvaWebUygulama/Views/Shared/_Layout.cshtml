@@ -28,12 +28,15 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-
-
     <link rel="stylesheet" href="~/Content/assets/css/style.css">
-
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.css">
+
+    <!-- DATE-PICKER -->
+    <link rel="stylesheet" href="~/Content/vendor/date-picker/css/datepicker.min.css">
+
+   
 </head>
 
 <body>
@@ -68,7 +71,7 @@
                     @if (User.IsInRole("A") || User.IsInRole("Y"))
                     {
                         <li>
-                            <a href="widgets.html"> <i class="menu-icon ti-ruler-pencil"></i>Fikstür Motoru </a>
+                            <a href="/FiksturMotoru"> <i class="menu-icon ti-ruler-pencil"></i>Fikstür Motoru </a>
                         </li>
                     }
                     <li>
@@ -183,8 +186,8 @@
                             {
                                 <a class="nav-link" href="/Home/Ayarlar"><i class="fa fa-user"></i> Turnuva Seç </a>
                             }
-                                <a class="nav-link" href="/Login/Logout"><i class="fa fa-power-off"></i> Çıkış</a>
-                            </div>
+                            <a class="nav-link" href="/Login/Logout"><i class="fa fa-power-off"></i> Çıkış</a>
+                        </div>
                     </div>
                 </div>
 
@@ -212,6 +215,9 @@
     <script src="~/Content/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="~/Content/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.steps.js"></script>
+
 
     <script>
         (function ($) {
@@ -231,7 +237,7 @@
             });
         })(jQuery);</script>
 
-   
+
 
 </body>
 

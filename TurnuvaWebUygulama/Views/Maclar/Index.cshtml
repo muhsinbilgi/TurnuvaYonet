@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<VeritabaniKatmani.Maclar>
+@model VeritabaniKatmani.MacListele
 
 
 
@@ -31,17 +31,12 @@
 
 
 
-
-
-@{ int hafta = @ViewBag.MaxHafta + 1;}
-
-
-@{ for (int i = 1; i < hafta; i++)
-    {
+@foreach (var MacHafta in Model.MacHaftalari)
+{
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h4>@i Hafta</h4>
+                <h4>@MacHafta.Hafta Hafta</h4>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -53,14 +48,13 @@
                             <th scope="col"></th>
                             <th scope="col">Takım Adı</th>
                             <th scope="col"></th>
-
                         </tr>
                     </thead>
 
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Maclar)
                     {
-                        if (i == item.Hafta)
+                        if (MacHafta.Hafta == item.Hafta)
                         {
                             <tbody>
                                 <tr>
@@ -70,7 +64,6 @@
                                     <td>-</td>
                                     <td>@Html.DisplayFor(modelItem => item.IkinciTakimAdi)</td>
                                     <td>@Html.ActionLink("Maç Detayı", "Detay", "Maclar", new { id = item.Id }, new { @class = "btn btn-secondary" })</td>
-
 
                                 </tr>
 
@@ -84,6 +77,35 @@
             </div>
         </div>
     </div>
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -16,16 +16,15 @@ namespace TurnuvaWebUygulama.Controllers
         public ActionResult Index()
         {
 
-           // turnuva id basılacak
-            var model = MvcDbHelper.Repository.GetById<Maclar>(Queries.Maclar.GetbyMax, new { TurnuvaId = 1 }).FirstOrDefault();
- 
-            ViewBag.MaxHafta = model.MaxHafta;
+            var m = MvcDbHelper.Repository.GetById<Kullanicilar>(Queries.Kullanicilar.GetbyName, new { KullaniciAdi = User.Identity.Name }).FirstOrDefault();
+
+            MacListele model = new MacListele();
+
+            model.MacHaftalari = MvcDbHelper.Repository.GetById<MacHaftalari>(Queries.MacHaftalari.GetbyId, new { TurnuvaId = m.SeciliTurnuva }).ToList();
+            model.Maclar = MvcDbHelper.Repository.GetById<Maclar>(Queries.Maclar.GetAll, new { Id = m.SeciliTurnuva }).ToList();
 
 
-           // int model1 = GrupOperasyon.hesapla(1, 2);
-
-
-            return View(GetMaclar());
+            return View(model);
         }
 
         public ActionResult Gruplar()
@@ -52,12 +51,7 @@ namespace TurnuvaWebUygulama.Controllers
 
 
 
-        public List<Maclar> GetMaclar()
-        {
-            var maclarResult = MvcDbHelper.Repository.GetAll<Maclar>(Queries.Maclar.GetAll).ToList();
-            return maclarResult;
-        }
-
+  
     
 
     }
